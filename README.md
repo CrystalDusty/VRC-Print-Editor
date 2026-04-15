@@ -1,43 +1,40 @@
-# VRC Print Remix Studio (Desktop)
+# VRC Print Remix Studio (Electron)
 
-A **non-web desktop app** for editing **already-created VRChat prints** in a clean dark-neon environment inspired by your provided theme.
+A professional, non-web desktop app for **editing already-made VRChat prints**.
 
-## What this app is for
+## Why this version
 
-VRChat already has its own print maker; this tool is a post-process editor.
+You asked for a cleaner and more professional app, with better responsiveness than the previous Tkinter build. This rewrite uses **Electron + Canvas** with a modern dark-neon desktop UI and a debounced rendering pipeline.
 
-**Workflow:**
-1. Drag/drop or browse an existing print image.
-2. Use dropdowns/sliders/tabs to remix it.
-3. Export a polished PNG.
+## Workflow
+
+1. Drag and drop a completed VRChat print into the app (or click **Load Print**).
+2. Tweak it using structured tabs (Basic / FX / Border & Stickers / Export).
+3. Export the final PNG.
 
 ## Features
 
-- VRC-style dark neon desktop UI with sidebar + dashboard cards.
-- Import existing print and edit non-destructively in a live preview.
-- Organized tabs for **Basic**, **FX**, **Borders & Stickers**, and **Export**.
-- Lots of controls:
-  - Fit mode, rotate, flip
-  - Brightness/contrast/saturation/sharpness
-  - Warmth/tint/vignette/grain/RGB glitch
-  - Creative border styles + sticker packs
-  - Signature stamp text
-- Quality-of-life:
-  - Random look generator
-  - Undo/redo
-  - Save/load project (`.vrcprint.json`)
-  - Copy current settings as JSON
-- Export presets including keep-original-size and VRChat-friendly dimensions.
+- Professional desktop layout inspired by your theme direction.
+- Real drag-and-drop for image files.
+- Fast preview rendering via a staged canvas pipeline + `requestAnimationFrame` queue.
+- Rich controls:
+  - Fit/Rotate/Flip
+  - Brightness/Contrast/Saturation/Sharpness
+  - Warmth/Tint/Vignette/Grain/RGB Glitch
+  - Border styles and sticker packs
+  - Stamp text
+- Project save/load (`.vrcprint.json`).
+- Export presets (keep original size, VRChat dimensions, upscale x2).
 
-## Run
+## Install and run
 
 ```bash
-python -m venv .venv
-source .venv/bin/activate
-pip install -r requirements.txt
-python app.py
+npm install
+npm run start
 ```
 
-## Note on drag-and-drop
+## Dev check
 
-The app attempts to enable native `tkdnd` drag-and-drop when available in your Tk installation. If not available, use the **Drop/Browse Print** button.
+```bash
+npm run check
+```
