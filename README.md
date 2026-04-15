@@ -26,15 +26,52 @@ You asked for a cleaner and more professional app, with better responsiveness th
 - Project save/load (`.vrcprint.json`).
 - Export presets (keep original size, VRChat dimensions, upscale x2).
 
-## Install and run
+## Windows PowerShell quickstart
 
-```bash
+Use these exact commands (do **not** type `install` or `run build` by themselves):
+
+```powershell
 npm install
 npm run start
 ```
 
-## Dev check
+## Build installers / packaged app
 
-```bash
+```powershell
+# verify scripts are available
+npm run
+
+# sanity check
 npm run check
+
+# unpacked build output (quick local validation)
+npm run build
+
+# full distributables in ./release
+npm run dist
 ```
+
+### Optional platform-specific build commands
+
+```powershell
+npm run build:win
+npm run build:portable
+npm run build:nsis
+npm run build:linux
+```
+
+### Build outputs
+
+- **Windows**: NSIS installer + portable executable.
+- **Linux**: AppImage + `.deb` package.
+- **macOS**: `.dmg`.
+
+All artifacts are generated in the `release/` directory.
+
+## If you get `Missing script: "build"`
+
+You are most likely in an older copy of the project that does not include the updated `package.json` scripts.
+
+1. Run `npm run` and confirm `build` is listed.
+2. If `build` is missing, re-download or pull the latest repo version.
+3. Delete `node_modules` + `package-lock.json`, then run `npm install` again.
