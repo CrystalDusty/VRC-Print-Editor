@@ -1,0 +1,15 @@
+{
+  "name": "vrc-print-remix-studio",
+  "version": "1.0.0",
+  "description": "Professional Electron desktop editor for remixing existing VRChat prints.",
+  "main": "main.js",
+  "author": "",
+  "license": "MIT",
+  "scripts": {
+    "start": "electron .",
+    "check": "node --check main.js && node --check preload.js && node --check src/renderer.js"
+  },
+  "devDependencies": {
+    "electron": "^35.2.0"
+  }
+}
