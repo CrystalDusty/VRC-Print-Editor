@@ -1,0 +1,54 @@
+{
+  "name": "vrc-print-remix-studio",
+  "version": "1.0.0",
+  "description": "Professional Electron desktop editor for remixing existing VRChat prints.",
+  "main": "main.js",
+  "author": "",
+  "license": "MIT",
+  "scripts": {
+    "start": "electron .",
+    "check": "node --check main.js && node --check preload.js && node --check src/renderer.js",
+    "build": "electron-builder --dir",
+    "dist": "electron-builder",
+    "package": "npm run build",
+    "build:win": "electron-builder --win",
+    "build:portable": "electron-builder --win portable",
+    "build:nsis": "electron-builder --win nsis",
+    "build:linux": "electron-builder --linux"
+  },
+  "devDependencies": {
+    "electron": "^35.2.0",
+    "electron-builder": "^24.13.3"
+  },
+  "build": {
+    "appId": "com.vrc.printremix",
+    "productName": "VRC Print Remix Studio",
+    "files": [
+      "main.js",
+      "preload.js",
+      "src/**/*",
+      "package.json"
+    ],
+    "directories": {
+      "output": "release"
+    },
+    "win": {
+      "target": [
+        "nsis",
+        "portable"
+      ]
+    },
+    "linux": {
+      "target": [
+        "AppImage",
+        "deb"
+      ],
+      "category": "Graphics"
+    },
+    "mac": {
+      "target": [
+        "dmg"
+      ]
+    }
+  }
+}
