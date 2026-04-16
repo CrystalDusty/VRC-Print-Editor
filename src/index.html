@@ -14,16 +14,14 @@
           <div class="brand-dot"></div>
           <div>
             <h1>VRC Studio</h1>
-            <p>Print Remix</p>
+            <p>Print Remix Pro</p>
           </div>
         </div>
         <nav>
-          <button class="nav-item active">Dashboard</button>
-          <button class="nav-item">Basic</button>
-          <button class="nav-item">FX</button>
-          <button class="nav-item">Borders</button>
-          <button class="nav-item">Stickers</button>
-          <button class="nav-item">Export</button>
+          <button class="nav-item active" data-tab="basic">Basic</button>
+          <button class="nav-item" data-tab="fx">FX</button>
+          <button class="nav-item" data-tab="border">Borders & Stickers</button>
+          <button class="nav-item" data-tab="export">Export</button>
         </nav>
         <p class="muted" id="dropHint">Drop a print anywhere in the window.</p>
       </aside>
@@ -44,7 +42,7 @@
         <section class="stats-row">
           <article class="stat-card"><span>Current File</span><strong id="fileName">No print loaded</strong></article>
           <article class="stat-card"><span>Resolution</span><strong id="fileSize">--</strong></article>
-          <article class="stat-card"><span>Pipeline</span><strong>GPU-fast Canvas</strong></article>
+          <article class="stat-card"><span>Render Mode</span><strong>Debounced Canvas</strong></article>
         </section>
 
         <section class="workspace">
@@ -63,43 +61,51 @@
 
             <div class="tab-content active" id="tab-basic">
               <label>Fit Mode
-                <select id="fitMode">
-                  <option>Contain</option>
-                  <option>Cover</option>
-                  <option>Stretch</option>
-                </select>
+                <select id="fitMode"><option>Contain</option><option>Cover</option><option>Stretch</option></select>
               </label>
+              <label>Zoom <input id="zoom" type="range" min="50" max="220" value="100" /></label>
+              <label>Pan X <input id="panX" type="range" min="-100" max="100" value="0" /></label>
+              <label>Pan Y <input id="panY" type="range" min="-100" max="100" value="0" /></label>
               <label>Rotate
                 <select id="rotate"><option>None</option><option>90</option><option>180</option><option>270</option></select>
               </label>
               <label>Flip
                 <select id="flip"><option>None</option><option>Horizontal</option><option>Vertical</option></select>
               </label>
-              <label>Brightness <input id="brightness" type="range" min="40" max="180" value="100" /></label>
-              <label>Contrast <input id="contrast" type="range" min="40" max="180" value="100" /></label>
-              <label>Saturation <input id="saturation" type="range" min="0" max="220" value="100" /></label>
-              <label>Sharpness <input id="sharpness" type="range" min="0" max="200" value="100" /></label>
               <label>Stamp Text <input id="stamp" type="text" placeholder="@YourName" /></label>
             </div>
 
             <div class="tab-content" id="tab-fx">
+              <label>Brightness <input id="brightness" type="range" min="40" max="180" value="100" /></label>
+              <label>Contrast <input id="contrast" type="range" min="40" max="180" value="100" /></label>
+              <label>Saturation <input id="saturation" type="range" min="0" max="220" value="100" /></label>
+              <label>Sharpness <input id="sharpness" type="range" min="0" max="200" value="100" /></label>
               <label>Warmth <input id="warmth" type="range" min="-70" max="70" value="0" /></label>
               <label>Tint <input id="tint" type="range" min="-70" max="70" value="0" /></label>
+              <label>Blur <input id="blur" type="range" min="0" max="15" value="0" /></label>
+              <label>Hue Shift <input id="hue" type="range" min="-180" max="180" value="0" /></label>
+              <label>Bloom <input id="bloom" type="range" min="0" max="100" value="0" /></label>
+              <label>Posterize <input id="posterize" type="range" min="0" max="8" value="0" /></label>
               <label>Vignette <input id="vignette" type="range" min="0" max="100" value="0" /></label>
               <label>Grain <input id="grain" type="range" min="0" max="100" value="0" /></label>
+              <label>Scanlines <input id="scanlines" type="range" min="0" max="100" value="0" /></label>
               <label>RGB Glitch <input id="glitch" type="range" min="0" max="24" value="0" /></label>
             </div>
 
             <div class="tab-content" id="tab-border">
               <label>Border Style
-                <select id="borderStyle"><option>None</option><option>Clean</option><option>Neon Pulse</option><option>Filmstrip</option><option>Arcade</option></select>
+                <select id="borderStyle"><option>None</option><option>Clean</option><option>Neon Pulse</option><option>Filmstrip</option><option>Arcade</option><option>Double</option></select>
               </label>
               <label>Border Size <input id="borderSize" type="range" min="0" max="120" value="30" /></label>
               <label>Border Color <input id="borderColor" type="color" value="#e84ea5" /></label>
               <label>Sticker Pack
-                <select id="stickerPack"><option>None</option><option>Stars</option><option>Hearts</option><option>Chaos</option></select>
+                <select id="stickerPack"><option>None</option><option>Stars</option><option>Hearts</option><option>Chaos</option><option>Sparkles</option></select>
               </label>
               <label>Sticker Density <input id="stickerDensity" type="range" min="0" max="80" value="12" /></label>
+              <label>Sticker Size <input id="stickerSize" type="range" min="6" max="60" value="22" /></label>
+              <div class="row-actions">
+                <button id="regenStickersBtn" class="btn">Regenerate Sticker Layout</button>
+              </div>
             </div>
 
             <div class="tab-content" id="tab-export">
@@ -112,6 +118,9 @@
                   <option>Upscale x2</option>
                 </select>
               </label>
+              <label>Background Fill (when aspect differs)
+                <select id="exportFill"><option>Black</option><option>Blurred</option><option>Average Color</option></select>
+              </label>
               <div class="row-actions">
                 <button id="savePngBtn" class="btn primary">Export PNG</button>
                 <button id="saveProjectBtn" class="btn">Save Project</button>
@@ -121,6 +130,22 @@
           </div>
         </section>
       </main>
+    </div>
+
+    <div id="snakeOverlay" class="snake-overlay hidden">
+      <div class="snake-modal">
+        <div class="snake-header">
+          <h3>Neon Snake</h3>
+          <button id="snakeClose" class="btn">Close</button>
+        </div>
+        <div class="snake-modes">
+          <button class="btn snake-mode active" data-mode="classic">Classic</button>
+          <button class="btn snake-mode" data-mode="wrap">Wrap</button>
+          <button class="btn snake-mode" data-mode="turbo">Turbo</button>
+        </div>
+        <div class="snake-stats">Score: <span id="snakeScore">0</span></div>
+        <canvas id="snakeCanvas" width="600" height="420"></canvas>
+      </div>
     </div>
 
     <script src="renderer.js"></script>

@@ -18,11 +18,12 @@ You asked for a cleaner and more professional app, with better responsiveness th
 - Real drag-and-drop for image files.
 - Fast preview rendering via a staged canvas pipeline + `requestAnimationFrame` queue.
 - Rich controls:
-  - Fit/Rotate/Flip
+  - Fit/Zoom/Pan/Rotate/Flip
   - Brightness/Contrast/Saturation/Sharpness
-  - Warmth/Tint/Vignette/Grain/RGB Glitch
-  - Border styles and sticker packs
-  - Stamp text
+  - Warmth/Tint/Blur/Hue Shift
+  - Vignette/Grain/Scanlines/RGB Glitch
+  - Border styles and sticker packs (with layout regeneration)
+  - Stamp text and export background fill modes
 - Project save/load (`.vrcprint.json`).
 - Export presets (keep original size, VRChat dimensions, upscale x2).
 
